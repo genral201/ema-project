@@ -1,0 +1,15 @@
+{
+  "name": "ema-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "@octokit/rest": "^18.0.0",
+    "@octokit/auth-app": "^3.0.0",
+    "electron": "^11.0.0"
+  }
+}

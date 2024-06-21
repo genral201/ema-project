@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ema AI Assistant</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        #chatbox { width: 300px; margin: 50px auto; padding: 20px; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .message { margin: 10px 0; }
+        .user { text-align: right; }
+    </style>
+</head>
+<body>
+    <div id="chatbox">
+        <div id="messages"></div>
+        <input type="text" id="input" placeholder="Type a message..." autofocus>
+    </div>
+    <script>
+        document.getElementById('input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                let message = e.target.value;
+                document.getElementById('messages').innerHTML += `<div class="message user">${message}</div>`;
+                fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                }).then(response => response.json()).then(data => {
+                    document.getElementById('messages').innerHTML += `<div class="message">${data.response}</div>`;
+                });
+                e.target.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
